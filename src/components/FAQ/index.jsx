@@ -14,17 +14,17 @@ const ITEMS = [
 
 function Item({ item, isOpen, onToggle }) {
   return (
-    <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-      <button onClick={onToggle} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '22px 0', background: 'none', border: 'none', cursor: 'pointer', color: '#fff', textAlign: 'left', gap: 16 }}>
-        <span style={{ fontSize: 16, fontWeight: 600, lineHeight: 1.4 }}>{item.q}</span>
-        <div style={{ width: 30, height: 30, borderRadius: '50%', flexShrink: 0, background: isOpen ? '#7c3aed' : 'rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background 0.2s' }}>
-          {isOpen ? <Minus size={13} /> : <Plus size={13} />}
+    <div style={{ borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
+      <button onClick={onToggle} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 0', background: 'none', border: 'none', cursor: 'pointer', color: '#0a0a0a', textAlign: 'left', gap: 16 }}>
+        <span style={{ fontSize: 15, fontWeight: 600, lineHeight: 1.4 }}>{item.q}</span>
+        <div style={{ width: 36, height: 36, borderRadius: '50%', flexShrink: 0, background: isOpen ? '#111' : 'rgba(0,0,0,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background 0.2s' }}>
+          {isOpen ? <Minus size={14} color="#fff" /> : <Plus size={14} color="#0a0a0a" />}
         </div>
       </button>
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }} style={{ overflow: 'hidden' }}>
-            <p style={{ fontSize: 15, lineHeight: 1.75, color: 'rgba(255,255,255,0.55)', paddingBottom: 22 }}>{item.a}</p>
+            <p style={{ fontSize: 15, lineHeight: 1.75, color: 'rgba(0,0,0,0.55)', paddingBottom: 22 }}>{item.a}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -37,16 +37,16 @@ export default function FAQ() {
   const [open, setOpen] = useState(null)
 
   return (
-    <section id="faq" style={{ background: '#000', padding: 'clamp(80px, 10vw, 140px) clamp(24px, 5vw, 80px)' }}>
+    <section id="faq" style={{ background: '#f5f5f7', padding: 'clamp(80px, 10vw, 140px) clamp(24px, 5vw, 80px)' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1.4fr', gap: isMobile ? 48 : 'clamp(40px, 8vw, 120px)', alignItems: 'start' }}>
 
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
           style={isMobile ? {} : { position: 'sticky', top: 100 }}
         >
-          <p style={{ fontSize: 11, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#a78bfa', marginBottom: 16 }}>Časté dotazy</p>
-          <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 800, lineHeight: 1.1, marginBottom: 20 }}>Máte<br />otázky?</h2>
-          <p style={{ fontSize: 15, lineHeight: 1.75, color: 'rgba(255,255,255,0.45)', marginBottom: 32 }}>Pokud tu odpověď nenajdete, napište nám — obvykle odpovídáme do hodiny.</p>
-          <a href="mailto:info@shieldee.cz" style={{ display: 'inline-block', border: '1px solid rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.7)', textDecoration: 'none', padding: '12px 24px', borderRadius: 100, fontSize: 13, fontWeight: 500 }}>
+          <p style={{ fontSize: 11, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#7c3aed', marginBottom: 16 }}>Časté dotazy</p>
+          <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 800, lineHeight: 1.1, marginBottom: 20, color: '#0a0a0a' }}>Máte<br />otázky?</h2>
+          <p style={{ fontSize: 15, lineHeight: 1.75, color: 'rgba(0,0,0,0.48)', marginBottom: 32 }}>Pokud tu odpověď nenajdete, napište nám — obvykle odpovídáme do hodiny.</p>
+          <a href="#" style={{ display: 'inline-block', border: '1px solid rgba(0,0,0,0.15)', color: 'rgba(0,0,0,0.65)', textDecoration: 'none', padding: '12px 24px', borderRadius: 100, fontSize: 13, fontWeight: 500 }}>
             Napsat nám
           </a>
         </motion.div>

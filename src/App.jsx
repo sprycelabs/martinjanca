@@ -1,25 +1,16 @@
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import VideoShowcase from './components/VideoShowcase'
-import GlossyMatte from './components/GlossyMatte'
-import HowItWorks from './components/HowItWorks'
-import Reviews from './components/Reviews'
-import FAQ from './components/FAQ'
-import CTA from './components/CTA'
-import Footer from './components/Footer'
+import { Routes, Route } from 'react-router-dom'
+import Landing from './pages/Landing'
+import ProductDetail from './pages/ProductDetail'
+import ScrollToTop from './components/ScrollToTop'
 
 export default function App() {
   return (
     <>
-      <Navbar />
-      <Hero />
-      <VideoShowcase />
-      <GlossyMatte />
-      <HowItWorks />
-      <Reviews />
-      <FAQ />
-      <CTA />
-      <Footer />
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/kryt" element={<ProductDetail />} />
+      </Routes>
     </>
   )
 }

@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useState } from 'react'
 import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion'
 import useIsMobile from '../../hooks/useIsMobile'
 
@@ -22,13 +22,6 @@ const CHAPTERS = [
     desc: 'Plná kompatibilita s ekosystémem MagSafe. Bezdrátové nabíjení, magnetické příslušenství — vše funguje bez sundávání krytu.',
   },
 ]
-
-function getActiveChapter(progress) {
-  for (let i = CHAPTERS.length - 1; i >= 0; i--) {
-    if (progress >= CHAPTERS[i].range[0]) return i
-  }
-  return 0
-}
 
 function chapterOpacity(progress, chapter) {
   const [start, end] = chapter.range
@@ -60,11 +53,11 @@ export default function VideoShowcase() {
   })
 
   return (
-    <div id="showcase" ref={containerRef} style={{ height: '300vh', background: '#000' }}>
+    <div id="showcase" ref={containerRef} style={{ height: '300vh', background: '#1B1D1F' }}>
       <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 
-        {/* Background */}
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 60% 80% at 50% 50%, rgba(109,40,217,0.1), transparent)', pointerEvents: 'none' }} />
+        {!isMobile && <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 80, background: 'linear-gradient(to bottom, #fff, transparent)', pointerEvents: 'none', zIndex: 2 }} />}
 
         {/* Video */}
         <video
@@ -77,17 +70,17 @@ export default function VideoShowcase() {
           style={{
             position: 'absolute',
             width: isMobile ? '100%' : '70%',
-            height: isMobile ? '60%' : '85%',
+            height: isMobile ? '75%' : '85%',
             objectFit: 'contain',
             left: isMobile ? 0 : '50%',
-            top: isMobile ? '10%' : '50%',
-            transform: isMobile ? 'none' : 'translate(-50%, -50%)',
+            top: isMobile ? '50%' : '50%',
+            transform: isMobile ? 'translateY(-55%)' : 'translate(-50%, -50%)',
             opacity: videoReady ? 1 : 0,
             transition: 'opacity 0.5s',
           }}
         />
 
-        {/* Loading placeholder */}
+        {/* Loading spinner */}
         {!videoReady && (
           <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <motion.div animate={{ opacity: [0.3, 0.8, 0.3] }} transition={{ repeat: Infinity, duration: 1.5 }}
@@ -98,7 +91,7 @@ export default function VideoShowcase() {
 
         {/* Chapter texts */}
         {CHAPTERS.map((ch, i) => (
-          <ChapterText key={i} chapter={ch} index={i} scrollYProgress={scrollYProgress} isMobile={isMobile} />
+          <ChapterText key={i} chapter={ch} scrollYProgress={scrollYProgress} isMobile={isMobile} />
         ))}
 
         {/* Scroll progress bar */}
@@ -128,7 +121,7 @@ function ChapterText({ chapter, scrollYProgress, isMobile }) {
     <motion.div style={{
       position: 'absolute',
       ...(isMobile
-        ? { bottom: 60, left: 24, right: 24, textAlign: 'center' }
+        ? { bottom: 20, left: 20, right: 20, textAlign: 'center' }
         : { left: 'clamp(40px, 5vw, 80px)', top: '50%', transform: 'translateY(-50%)', maxWidth: 320 }
       ),
       pointerEvents: 'none', opacity, y: isMobile ? 0 : y,
@@ -137,12 +130,14 @@ function ChapterText({ chapter, scrollYProgress, isMobile }) {
         <div style={{ width: 20, height: 1, background: '#a78bfa' }} />
         <span style={{ fontSize: 11, letterSpacing: '0.22em', color: '#a78bfa', textTransform: 'uppercase' }}>{chapter.label}</span>
       </div>
-      <h2 style={{ fontSize: isMobile ? '1.7rem' : 'clamp(2rem, 3.5vw, 3rem)', fontWeight: 800, lineHeight: 1.05, marginBottom: 16, whiteSpace: 'pre-line' }}>
+      <h2 style={{ fontSize: isMobile ? '1.4rem' : 'clamp(2rem, 3.5vw, 3rem)', fontWeight: 800, lineHeight: 1.05, marginBottom: isMobile ? 8 : 16, whiteSpace: 'pre-line', color: '#fff' }}>
         {chapter.title}
       </h2>
-      <p style={{ fontSize: isMobile ? 13 : 15, lineHeight: 1.75, color: 'rgba(255,255,255,0.52)' }}>
-        {chapter.desc}
-      </p>
+      {!isMobile && (
+        <p style={{ fontSize: 15, lineHeight: 1.75, color: 'rgba(255,255,255,0.52)' }}>
+          {chapter.desc}
+        </p>
+      )}
     </motion.div>
   )
 }
