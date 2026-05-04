@@ -2,9 +2,9 @@ import { AtSign, Globe, Mail } from 'lucide-react'
 import useIsMobile from '../../hooks/useIsMobile'
 
 const LINKS = [
-  { label: 'O produktu', href: '#showcase' },
-  { label: 'Funkce', href: '#features' },
-  { label: 'Recenze', href: '#reviews' },
+  { label: 'Produkt', href: '#showcase' },
+  { label: 'Povrchy', href: '#povrchy' },
+  { label: 'Jak to funguje', href: '#jak-to-funguje' },
   { label: 'FAQ', href: '#faq' },
 ]
 
@@ -17,8 +17,8 @@ export default function Footer() {
 
         <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 40, marginBottom: 48 }}>
           <div style={{ maxWidth: 280 }}>
-            <span style={{ fontWeight: 900, fontSize: 20, letterSpacing: '-0.03em', display: 'block', marginBottom: 12 }}>PRODUKT</span>
-            <p style={{ fontSize: 14, lineHeight: 1.7, color: 'rgba(255,255,255,0.4)' }}>Výjimečný design. Precizní zpracování. Navrženo bez kompromisů.</p>
+            <span style={{ fontWeight: 900, fontSize: 20, letterSpacing: '-0.02em', display: 'block', marginBottom: 12 }}>Shieldee</span>
+            <p style={{ fontSize: 14, lineHeight: 1.7, color: 'rgba(255,255,255,0.4)' }}>Tvůj moment. Tvůj kryt. Prémiové kryty s vlastní fotografií — doručení do druhého dne.</p>
           </div>
 
           <div style={{ display: 'flex', gap: isMobile ? 32 : 48, flexWrap: 'wrap' }}>
@@ -31,7 +31,7 @@ export default function Footer() {
             <div>
               <p style={{ fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 18 }}>Kontakt</p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {[{ icon: Mail, label: 'info@produkt.cz' }, { icon: AtSign, label: '@produkt' }, { icon: Globe, label: 'produkt.cz' }].map(({ icon: Icon, label }) => (
+                {[{ icon: Mail, label: 'info@shieldee.cz' }, { icon: AtSign, label: '@shieldee' }, { icon: Globe, label: 'shieldee.cz' }].map(({ icon: Icon, label }) => (
                   <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: 'rgba(255,255,255,0.55)' }}>
                     <Icon size={14} />{label}
                   </div>
@@ -42,11 +42,9 @@ export default function Footer() {
         </div>
 
         <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 24, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
-          <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.25)' }}>© 2026 PRODUKT. Všechna práva vyhrazena.</p>
+          <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.25)' }}>© 2026 Shieldee. Všechna práva vyhrazena.</p>
           <div style={{ display: 'flex', gap: 20 }}>
-            {['Podmínky', 'Soukromí', 'Cookies'].map(t => (
-              <a key={t} href="#" style={{ fontSize: 13, color: 'rgba(255,255,255,0.25)', textDecoration: 'none' }}>{t}</a>
-            ))}
+            {['Podmínky', 'Soukromí', 'Cookies'].map(t => <a key={t} href="#" style={{ fontSize: 13, color: 'rgba(255,255,255,0.25)', textDecoration: 'none' }}>{t}</a>)}
           </div>
         </div>
 
